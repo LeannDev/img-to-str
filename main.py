@@ -13,11 +13,11 @@ import pytesseract
 # |-----> descargar idioma español <-----|
 # https://github.com/tesseract-ocr/tessdata/raw/4.00/spa.traineddata
 # en la ruta /usr/share/tesseract-ocr/4.00/tessdata
-lang = 'spa'
+lang = 'eng' # español = spa | ingles = eng
 
 
 # PDF file to convert
-file = 'archivo2.pdf'
+file = 'file2.pdf'
 
 pages = convert_from_path(file, 500) #500
 contador = 1
@@ -57,7 +57,7 @@ for i in range(1, file_limit + 1):
     f = open(outfile, 'w')
 
     # extract text from image using pytesseract with a custom fonts
-    text = str(pytesseract.image_to_string(img, lang=lang, config='--psm 6 --oem 3 -c tessedit_char_whitelist=DOTMATRI.TTF'))
+    text = str(pytesseract.image_to_string(img, lang=lang,))
 
 
     #text = str(pytesseract.image_to_string(img, lang=lang, )) 
@@ -71,22 +71,22 @@ for i in range(1, file_limit + 1):
     f.close()
 
 # iterate over the list of files
-for i in range(1, file_limit + 1):
-    # open file
-    f = open('./out_txt/msj_' + str(i) + '.txt', 'r')
+# for i in range(1, file_limit + 1):
+#     # open file
+#     f = open('./out_txt/msj_' + str(i) + '.txt', 'r')
 
-    # search for the word 'Unit'
-    word1 = 'Serie Nro:'
-    for line in f:
-        if word1 in line:
-            # position of the word 'Unit' in line
-            pos = line.find(word1)
-            # position end of the word 'Unit' in line
-            pos_end = pos + len(word1)
-            # extract the rest of the line
-            rest = line[pos_end:]
+#     # search for the word 'Unit'
+#     word1 = 'Serie Nro:'
+#     for line in f:
+#         if word1 in line:
+#             # position of the word 'Unit' in line
+#             pos = line.find(word1)
+#             # position end of the word 'Unit' in line
+#             pos_end = pos + len(word1)
+#             # extract the rest of the line
+#             rest = line[pos_end:]
 
-            print(rest)
+#             print(rest)
 
     # close file
     f.close()
